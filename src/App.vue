@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img class="center" src="./assets/logo.png">
     <h1>{{ title }}</h1>
     <Navbar />
-    <AllFriends :friends="friends" />
+    <AllFriends :friends="friends" @delete="deleteFriend" />
     <OnlineFriends :friends="friends" />
   </div>
 </template>
@@ -30,6 +30,14 @@ export default {
         {name:'Bowser' , online: false}
       ]
     }
+  },
+  methods: {
+    deleteFriend(payload) {
+      console.log(payload)
+      this.friends = this.friends.filter(friend => {
+          return friend.name !== payload.name
+      })
+    }
   }
 }
 </script>
@@ -40,4 +48,12 @@ h1{
   font-weight: normal;
   text-align: center;
 }
+
+.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+}
+
 </style>
